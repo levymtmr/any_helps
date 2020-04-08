@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, TouchableOpacity, FlatList, Image, TextInput } from "react-native";
-import { Feather, MaterialIcons } from '@expo/vector-icons';
+import { Feather, MaterialIcons, EvilIcons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 
 import api from '../../services/api';
@@ -18,6 +18,15 @@ export default function Incidents() {
 
     function navigationToDetail(product) {
         navigation.navigate('detail', { product });
+    }
+
+    function navigationToUser() {
+        navigation.navigate('user-detail');
+    }
+
+    async function searchProducts(product) {
+        const response = await api.get(`products/?search=${product}`);
+        searchProducts(response.data);
     }
 
     async function loadProducts() {
@@ -45,13 +54,21 @@ export default function Incidents() {
 
     return (
         <View style={styles.container}>
+            <TouchableOpacity style={styles.userButton}
+                onPress={() => navigationToUser()}
+            >
+                <EvilIcons name="user" size={40} />
+            </TouchableOpacity>
             <View style={styles.header}>
                 <Text style={styles.headerText}>Any Helps</Text>
             </View>
             <Text style={styles.title}>Find what you want</Text>
+
             <View style={styles.searchBox}>
-                <MaterialIcons name='search' size={30}></MaterialIcons>
-                <TextInput style={styles.searchInput} />
+                <TouchableOpacity>
+                    <MaterialIcons name='search' size={30}></MaterialIcons>
+                </TouchableOpacity>
+                <TextInput onPress={text => searchProducts(text)} style={styles.searchInput} />
             </View>
 
             <View style={styles.incidentList}>

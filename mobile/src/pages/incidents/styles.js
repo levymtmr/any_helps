@@ -72,5 +72,10 @@ export default StyleSheet.create({
     },
     searchBox: {
         flexDirection: 'row',
+    },
+    userButton: {
+        flexDirection: "row",
+        alignItems: "flex-end",
+        justifyContent: 'flex-end',
     }
 })
