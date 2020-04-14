@@ -12,7 +12,6 @@ class CategorySerializer(serializers.ModelSerializer):
 
 class ProductSerializer(serializers.ModelSerializer):
     category = CategorySerializer()
-    # image = serializers.ImageField(use_url=settings.STATIC_ROOT, read_only=True)
 
     class Meta:
         model = Product
@@ -33,11 +32,7 @@ class ProductSerializer(serializers.ModelSerializer):
         validated_data_copy['category'] = category_instance
         return validated_data_copy
 
-
     def create(self, validated_data):
-        # validated_data_copy = validated_data.copy()
-        # category_instance = Category.objects.filter(name=validated_data.get('category').get('name'))[0]
-        # validated_data_copy['category'] = category_instance
         return Product.objects.create(**self.get_category_instance(validated_data))
 
     def update(self, instance, validated_data):

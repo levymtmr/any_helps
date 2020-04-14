@@ -14,7 +14,7 @@ export default function RegisterForm() {
 
     const navigation = useNavigation();
 
-    
+
     function redirectToLogin() {
         navigation.navigate('login');
     }
@@ -40,7 +40,11 @@ export default function RegisterForm() {
             <Text style={styles.labels}>Last Name</Text>
             <TextInput style={styles.inputs} onChangeText={text => setLastName(text)} />
             <Text style={styles.labels}>Email</Text>
-            <TextInput style={styles.inputs} keyboardType="email-address" onChangeText={text => setEmail(text)} />
+            <TextInput style={styles.inputs}
+                keyboardType="email-address"
+                secureTextEntry={true}
+                autoCapitalize="none"
+                onChangeText={text => setEmail(text)} />
             <Text style={styles.labels}>Password</Text>
             <TextInput style={styles.inputs} secureTextEntry={true} onChangeText={text => setPassword(text)} />
             <TouchableOpacity style={styles.registerButton} onPress={createUser}>

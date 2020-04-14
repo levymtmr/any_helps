@@ -1,15 +1,16 @@
 import React, { useState } from 'react';
-import {View, Text, TextInput, Button} from 'react-native';
+import { View, Text, TextInput, Button } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import { TouchableOpacity } from 'react-native-gesture-handler';
+import { AsyncStorage } from 'react-native';
 
 import api from '../../services/api';
-
 import styles from './styles';
-import { TouchableOpacity } from 'react-native-gesture-handler';
 
 export default function Login() {
-    const [username, setUsername] = useState();
-    const [password, setPassword] = useState();
+    const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
+    const [token, setToken] = useState();
 
     const navigation = useNavigation();
 
@@ -17,27 +18,52 @@ export default function Login() {
         navigation.navigate('form-register');
     }
 
+    _storeData = async (response) => {
+        try {
+            const {access} = response.data;
+            await AsyncStorage.setItem('store', access);
+            
+        } catch (error) {
+            console.log(error);
+        }
+    };
 
-    function loginVerification() {
-        if (username) {
+
+
+    async function loginVerification() {
+        try {
+            const response = await api.post('token/',
+                {
+                    username: username,
+                    password: password
+                })
+            _storeData(response);
             redirectToHelps();
+        } catch (error) {
+            console.log(error);
         }
     }
 
     function redirectToHelps() {
-        navigation.navigate('incidents');
+        navigation.navigate('helps');
     }
 
     return (
         <View style={styles.container}>
             <Text style={styles.labels}>Login</Text>
-            <TextInput style={styles.inputs} onChangeText={(text)=> setUsername(text)}/>
+            <TextInput style={styles.inputs} placeholder="Username"
+                value={username}
+                onChangeText={setUsername}
+                autoCapitalize="none" />
             <Text style={styles.labels}>Password</Text>
-            <TextInput secureTextEntry={true} style={styles.inputs} onChangeText={(text)=> setPassword(text)}/>
+            <TextInput style={styles.inputs} placeholder="Password"
+                value={password}
+                onChangeText={setPassword}
+                secureTextEntry />
             <TouchableOpacity style={styles.enterButton} onPress={loginVerification}>
                 <Text>Enter</Text>
             </TouchableOpacity>
-            <Button style={styles.registerButton} title="Register" onPress={navigationToRegister}/>
+            <Button style={styles.registerButton} title="Register" onPress={navigationToRegister} />
         </View>
     )
 }

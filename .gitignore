@@ -1,2 +1,7 @@
+# enviroments files
 .idea/*
-.DS_Store/*
+.DS_Store
+.vscode/*
+
+# python files
+__pycache__

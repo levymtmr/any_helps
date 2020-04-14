@@ -8,7 +8,7 @@ import api from '../../services/api';
 import styles from './styles';
 
 
-export default function Incidents() {
+export default function Helps() {
     const [products, setProduct] = useState([]);
     const [count, setCount] = useState(0);
     const [pages, setPage] = useState(1);

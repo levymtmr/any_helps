@@ -32,5 +32,8 @@ export default StyleSheet.create({
     },
     registerButton: {
         marginTop: 30,
+    },
+    errorMsg: {
+        color: "#a83232",
     }
 });
