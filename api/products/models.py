@@ -17,10 +17,14 @@ class Product(models.Model):
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     location = models.CharField(max_length=200)
     description = models.TextField()
-    image = models.ImageField()
+    image = models.ImageField(null=True)
 
     def __str__(self):
         return self.name
+
+    '''
+       To analise data types, which is necessary describe item size. 
+    '''
 
 
 

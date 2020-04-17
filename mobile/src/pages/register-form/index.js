@@ -8,7 +8,6 @@ import styles from './styles';
 
 export default function RegisterForm() {
     const [username, setUsername] = useState();
-    const [lastName, setLastName] = useState();
     const [email, setEmail] = useState();
     const [password, setPassword] = useState();
 
@@ -20,13 +19,12 @@ export default function RegisterForm() {
     }
 
     async function createUser() {
-        const response = await api.post(`users/`, {
+        const response = await api.post(`register/`, {
             username: username,
-            last_name: lastName,
             email: email,
             password: password
         }).then(function (response) {
-            console.log(response)
+            console.log("dsjadsdjhahkjsjdas",response)
             redirectToLogin()
         }).catch(function (error) {
             console.log(error)
@@ -37,12 +35,9 @@ export default function RegisterForm() {
         <View style={styles.container}>
             <Text style={styles.labels}>Name</Text>
             <TextInput style={styles.inputs} onChangeText={text => setUsername(text)} />
-            <Text style={styles.labels}>Last Name</Text>
-            <TextInput style={styles.inputs} onChangeText={text => setLastName(text)} />
             <Text style={styles.labels}>Email</Text>
             <TextInput style={styles.inputs}
                 keyboardType="email-address"
-                secureTextEntry={true}
                 autoCapitalize="none"
                 onChangeText={text => setEmail(text)} />
             <Text style={styles.labels}>Password</Text>

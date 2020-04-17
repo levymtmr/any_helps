@@ -29,5 +29,51 @@ export default StyleSheet.create({
         borderRadius: 5,
         height: 50,
         flexDirection: 'row',
+    },
+    sectionTitle: {
+        paddingTop: 15,
+        paddingBottom: 15,
+        fontSize: 20,
+    },
+    helpSection: {
+        paddingTop: 0,
+    },
+    categories: {
+        paddingTop: 10,
+        paddingBottom: 0,
+    }, 
+    textDescription: {
+        height: 100,
+        width: 350,
+        borderRadius: 10,
+        backgroundColor: '#ffffff',
+        paddingBottom: 5,
+    },
+    labels: {
+        paddingTop: 10,
+        fontSize: 15,
+        paddingBottom: 5,
+    },
+    inputHelps: {
+        backgroundColor: '#ffffff',
+        width: 350,
+        height: 50,
+        borderRadius: 10,
+        height: 30,
+        marginTop: 10,
+    },
+    userDataSection: {
+        fontSize: 10,
+        backgroundColor: '#aebfae',
+        borderWidth: 2,
+        borderRadius: 5,
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+        width: 350,
+        height: 120,
+    }, 
+    labelUserData: {
+        fontSize: 15,
     }
 });

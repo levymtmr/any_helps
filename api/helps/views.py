@@ -10,4 +10,6 @@ class HelpViewSet(viewsets.ModelViewSet):
     serializer_class = HelpSerializer
     # authentication_classes = [SessionAuthentication, BasicAuthentication]
     # permission_classes = [IsAuthenticated]
-
+    
+    
+        
