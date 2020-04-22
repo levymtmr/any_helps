@@ -5,3 +5,6 @@
 
 # python files
 __pycache__
+
+.jshintrc/*
+.jshintrc

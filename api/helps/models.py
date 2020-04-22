@@ -8,4 +8,4 @@ class Help(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     date = models.DateField(auto_now=True)
     help_conditions = models.BooleanField()
-    # location = looking forward django geolocation
+    location = models.CharField(max_length=250)
