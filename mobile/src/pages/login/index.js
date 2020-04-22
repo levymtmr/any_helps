@@ -3,6 +3,7 @@ import { View, Text, TextInput, Button } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { AsyncStorage } from 'react-native';
+import jwt_decode from 'jwt-decode';
 
 import api from '../../services/api';
 import styles from './styles';
@@ -11,6 +12,8 @@ export default function Login() {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [token, setToken] = useState();
+    const [wrong, setWrong] = useState(false);
+    const [userData, setUserData] = useState();
 
     const navigation = useNavigation();
 
@@ -18,11 +21,36 @@ export default function Login() {
         navigation.navigate('form-register');
     }
 
+    function wrongUserPass() {
+        setTimeout(() => {
+            setWrong(false)
+        }, 3000);
+        return (
+            <View style={styles.wrongBanner}>
+                <Text style={styles.errorMsg}>Wrong Credentials</Text>
+            </View>
+
+        )
+    }
+
+    async function getUser(id) {
+        const options = {
+            headers: { 'Authorization': `Token ${token}` }
+        }
+        try {
+            const response = await api.get(`users/${id}`, options)
+            await AsyncStorage.setItem('user', JSON.stringify(response.data))
+        } catch(error) {
+            console.log('error ====', error);
+        }
+    }
+
     _storeData = async (response) => {
         try {
-            const {access} = response.data;
-            await AsyncStorage.setItem('store', access);
-            
+            const { access } = response.data;
+            const userCredentials = jwt_decode(access);
+            setToken(access);
+            getUser(userCredentials.user_id);
         } catch (error) {
             console.log(error);
         }
@@ -40,7 +68,9 @@ export default function Login() {
             _storeData(response);
             redirectToHelps();
         } catch (error) {
-            console.log(error);
+            if (error.request.status === 400) {
+                setWrong(true);
+            }
         }
     }
 
@@ -64,6 +94,7 @@ export default function Login() {
                 <Text>Enter</Text>
             </TouchableOpacity>
             <Button style={styles.registerButton} title="Register" onPress={navigationToRegister} />
+            {wrong ? wrongUserPass() : <Text></Text>}
         </View>
     )
 }

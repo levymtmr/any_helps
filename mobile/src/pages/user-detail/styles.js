@@ -6,8 +6,8 @@ export default StyleSheet.create({
         flex: 1,
         paddingHorizontal: 24,
         paddingTop: Constants.statusBarHeight + 20,
-        justifyContent: 'flex-start',
-        alignItems: 'flex-start',
+        justifyContent: 'center',
+        alignItems: 'center',
     },
     inputs: {
         backgroundColor: '#ffffff',
@@ -53,6 +53,8 @@ export default StyleSheet.create({
         paddingTop: 10,
         fontSize: 15,
         paddingBottom: 5,
+        alignItems: 'center',
+        justifyContent: 'center',
     },
     inputHelps: {
         backgroundColor: '#ffffff',
@@ -61,6 +63,7 @@ export default StyleSheet.create({
         borderRadius: 10,
         height: 30,
         marginTop: 10,
+        
     },
     userDataSection: {
         fontSize: 10,
@@ -75,5 +78,13 @@ export default StyleSheet.create({
     }, 
     labelUserData: {
         fontSize: 15,
+    },
+    sendHelp: {
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginBottom: 50,
+    },
+    sendHelpText: {
+        fontSize: 30,
     }
 });

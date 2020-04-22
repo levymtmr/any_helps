@@ -29,7 +29,7 @@ export default function Helps() {
         searchProducts(response.data);
     }
 
-    async function loadProducts() {
+    async function loadHelps() {
         if (loading) {
             return;
         }
@@ -49,7 +49,7 @@ export default function Helps() {
     }
 
     useEffect(() => {
-        loadProducts();
+        loadHelps();
     }, []);
 
     return (
@@ -63,7 +63,6 @@ export default function Helps() {
                 <Text style={styles.headerText}>Any Helps</Text>
             </View>
             <Text style={styles.title}>Find what you want</Text>
-
             <View style={styles.searchBox}>
                 <TouchableOpacity>
                     <MaterialIcons name='search' size={30}></MaterialIcons>
@@ -77,12 +76,12 @@ export default function Helps() {
                     style={styles.incidentList}
                     keyExtractor={product => String(product.id)}
                     // showsVerticalScrollIndicator={false}
-                    onEndReached={loadProducts}
+                    onEndReached={loadHelps}
                     onEndReachedThreshold={0.2}
                     renderItem={({ item: product }) => (
                         <View style={styles.incident}>
                             <Text style={styles.incidentProperty}>{product.name}</Text>
-                            <Image style={styles.image} source={{ uri: product.image }} />
+                            {/* <Image style={styles.image} source={{ uri: product.image }} /> */}
                             <Text style={styles.incidentValue}>{product.description}</Text>
                             <TouchableOpacity
                                 style={styles.detailsButton}

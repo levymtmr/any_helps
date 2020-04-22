@@ -24,7 +24,6 @@ export default function RegisterForm() {
             email: email,
             password: password
         }).then(function (response) {
-            console.log("dsjadsdjhahkjsjdas",response)
             redirectToLogin()
         }).catch(function (error) {
             console.log(error)

@@ -35,5 +35,15 @@ export default StyleSheet.create({
     },
     errorMsg: {
         color: "#a83232",
+    }, 
+    wrongBanner: {
+        marginTop: 100,
+        backgroundColor: '#d48c85',
+        borderRadius: 10,
+        fontSize: 50,
+        width: 350,
+        height: 50,
+        justifyContent: 'center',
+        alignItems: 'center',
     }
 });
