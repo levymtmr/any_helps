@@ -77,5 +77,9 @@ export default StyleSheet.create({
         flexDirection: "row",
         alignItems: "flex-end",
         justifyContent: 'flex-end',
+    },
+    withoutImage: {
+        justifyContent: 'center',
+        alignItems: 'center'
     }
-})
+});

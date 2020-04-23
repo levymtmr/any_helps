@@ -24,10 +24,10 @@ export default function RegisterForm() {
             email: email,
             password: password
         }).then(function (response) {
-            redirectToLogin()
+            redirectToLogin();
         }).catch(function (error) {
-            console.log(error)
-        })
+            console.log(error);
+        });
     }
 
     return (

@@ -3,6 +3,7 @@ import { View, TouchableOpacity, Image, Text, Linking } from "react-native";
 import { Feather } from '@expo/vector-icons';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import * as MailComposer from 'expo-mail-composer';
+import { MaterialIcons, EvilIcons } from '@expo/vector-icons';
 
 import styles from './styles';
 
@@ -13,9 +14,9 @@ export default function Details() {
     const route = useRoute();
 
 
-    const product = route.params.product;
+    const help = route.params.help;
 
-    const message = 'Hi!!'
+    const message = 'Hi!!';
 
     function navigateBack() {
         navigation.goBack();
@@ -26,7 +27,7 @@ export default function Details() {
             subject: 'testando o enviar email',
             recipients: ['teste@teste.com'],
             body: message,
-        })
+        });
     }
 
     function sendWhatsapp() {
@@ -42,12 +43,16 @@ export default function Details() {
                 </TouchableOpacity>
             </View>
             <View style={styles.incident}>
-                <Text style={[styles.incidentProperty, { marginTop: 0 }]}>{product.name}</Text>
-                <Image style={styles.image} source={{ uri: product.image }} />
-                <Text style={styles.incidentValue}>{product.description}</Text>
+                <Text style={[styles.incidentProperty, { marginTop: 0 }]}>{help.product.name}</Text>
+                {/* <Image style={styles.image} source={{ uri: help.product.image }} /> */}
+                {help.product.image != null ? <Image style={styles.image} source={{ uri: help.product.image }} /> :
+                                <View style={styles.withoutImage}>
+                                    <MaterialIcons name="image" size={200}></MaterialIcons>
+                                </View>}
+                <Text style={styles.incidentValue}>{help.product.description}</Text>
             </View>
             <View style={styles.contactBox}>
-                <Text style={styles.itemTitle}>Located in {product.location}</Text>
+                <Text style={styles.itemTitle}>Located in {help.product.location}</Text>
                 <Text style={styles.itemTitle}>Catch this Item</Text>
 
                 <View style={styles.actions}>

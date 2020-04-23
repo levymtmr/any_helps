@@ -10,7 +10,7 @@ class HelpSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Help
-        fields = ('user', 'date', 'help_conditions', 'product', 'location')
+        fields = ('id','user', 'date', 'help_conditions', 'product', 'location')
 
     def create(self, validated_data):
         """

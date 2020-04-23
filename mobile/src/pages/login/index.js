@@ -23,13 +23,12 @@ export default function Login() {
 
     function wrongUserPass() {
         setTimeout(() => {
-            setWrong(false)
+            setWrong(false);
         }, 3000);
         return (
             <View style={styles.wrongBanner}>
                 <Text style={styles.errorMsg}>Wrong Credentials</Text>
             </View>
-
         )
     }
 
@@ -62,8 +61,8 @@ export default function Login() {
         try {
             const response = await api.post('token/',
                 {
-                    username: username,
-                    password: password
+                    username: 'Levy',
+                    password: '12345678'
                 })
             _storeData(response);
             redirectToHelps();

@@ -62,5 +62,9 @@ export default StyleSheet.create({
     },
     itemTitle: {
         textAlign: 'center'
+    },
+    withoutImage: {
+        justifyContent: 'center',
+        alignItems: 'center'
     }
 });

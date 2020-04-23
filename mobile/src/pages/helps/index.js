@@ -9,24 +9,27 @@ import styles from './styles';
 
 
 export default function Helps() {
-    const [products, setProduct] = useState([]);
+    const [helps, setHelps] = useState([]);
     const [count, setCount] = useState(0);
     const [pages, setPage] = useState(1);
     const [loading, setLoading] = useState(false);
 
+
     const navigation = useNavigation();
 
-    function navigationToDetail(product) {
-        navigation.navigate('detail', { product });
+    function navigationToDetail(help) {
+        navigation.navigate('detail', { help });
     }
 
     function navigationToUser() {
         navigation.navigate('user-detail');
     }
 
-    async function searchProducts(product) {
-        const response = await api.get(`products/?search=${product}`);
-        searchProducts(response.data);
+    async function searchHelps(help) {
+        const response = await api.get(`helps/`, {
+            params: { help }
+        });
+        setHelps(response.data.results);
     }
 
     async function loadHelps() {
@@ -34,16 +37,16 @@ export default function Helps() {
             return;
         }
 
-        if (count > 0 && products.length === count) {
+        if (count > 0 && helps.length === count) {
             return;
         }
         setLoading(true);
 
-        const response = await api.get(`products`, {
+        const response = await api.get(`helps/`, {
             params: { pages }
         });
-        setProduct(response.data.results.slice(products));
-        setCount(response.data.count)
+        setHelps(response.data.results);
+        setCount(response.data.count);
         setPage(pages + 1);
         setLoading(false);
     }
@@ -67,25 +70,28 @@ export default function Helps() {
                 <TouchableOpacity>
                     <MaterialIcons name='search' size={30}></MaterialIcons>
                 </TouchableOpacity>
-                <TextInput onPress={text => searchProducts(text)} style={styles.searchInput} />
+                <TextInput onChangeText={text => searchHelps(text)} style={styles.searchInput} />
             </View>
 
             <View style={styles.incidentList}>
                 <FlatList
-                    data={products}
+                    data={helps}
                     style={styles.incidentList}
-                    keyExtractor={product => String(product.id)}
+                    keyExtractor={help => String(help.id)}
                     // showsVerticalScrollIndicator={false}
                     onEndReached={loadHelps}
                     onEndReachedThreshold={0.2}
-                    renderItem={({ item: product }) => (
+                    renderItem={({ item: help }) => (
                         <View style={styles.incident}>
-                            <Text style={styles.incidentProperty}>{product.name}</Text>
-                            {/* <Image style={styles.image} source={{ uri: product.image }} /> */}
-                            <Text style={styles.incidentValue}>{product.description}</Text>
+                            <Text style={styles.incidentProperty}>{help.product.name}</Text>
+                            {help.product.image != null ? <Image style={styles.image} source={{ uri: help.product.image }} /> :
+                                <View style={styles.withoutImage}>
+                                    <MaterialIcons name="image" size={200}></MaterialIcons>
+                                </View>}
+                            <Text style={styles.incidentValue}>{help.product.description}</Text>
                             <TouchableOpacity
                                 style={styles.detailsButton}
-                                onPress={() => navigationToDetail(product)}>
+                                onPress={() => navigationToDetail(help)}>
                                 <Text style={styles.detailsButtonText}>
                                     More Details
                                 </Text>

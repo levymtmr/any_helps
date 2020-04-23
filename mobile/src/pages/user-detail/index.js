@@ -21,9 +21,6 @@ export default function UserDetail() {
     const [location, setLocation] = useState();
     const [image, setImage] = useState();
 
-
-
-
     async function decoder() {
         const value = await AsyncStorage.getItem('user');
         const { id, username, email, date_joined } = JSON.parse(value);
@@ -32,7 +29,7 @@ export default function UserDetail() {
             "username": username,
             "email": email,
             "date_joined": date_joined
-        }
+        };
         setUser(user);
     }
 
