@@ -4,6 +4,7 @@ import { AsyncStorage } from 'react-native';
 import CameraRoll from "@react-native-community/cameraroll";
 import { EvilIcons } from '@expo/vector-icons';
 import * as ImagePicker from 'expo-image-picker';
+import { useNavigation } from '@react-navigation/native';
 
 
 import api from '../../services/api';
@@ -20,6 +21,12 @@ export default function UserDetail() {
     const [category, setCategory] = useState('');
     const [location, setLocation] = useState();
     const [image, setImage] = useState();
+
+    const navigation = useNavigation();
+
+    function navigateToHelps() {
+        navigation.navigate('helps');
+    }
 
     async function decoder() {
         const value = await AsyncStorage.getItem('user');
@@ -52,6 +59,7 @@ export default function UserDetail() {
                 "location": location,
                 "image": image,
             });
+            navigateToHelps();
         } catch (error) {
             console.log("error", error);
         }

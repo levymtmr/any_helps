@@ -61,8 +61,8 @@ export default function Login() {
         try {
             const response = await api.post('token/',
                 {
-                    username: 'Levy',
-                    password: '12345678'
+                    username: username,
+                    password: password
                 })
             _storeData(response);
             redirectToHelps();
