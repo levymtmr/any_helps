@@ -1,6 +1,6 @@
 certifi==2019.11.28
 Django==2.2.20
-djangorestframework==3.11.0
+djangorestframework==3.11.2
 GDAL==3.0.2
 iso8601==0.1.12
 numpy==1.18.1
